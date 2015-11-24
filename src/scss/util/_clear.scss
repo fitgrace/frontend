@@ -1,0 +1,28 @@
+/**
+ * File   : _clear.scss
+ * Author : FitGrace【fitingrace#gmail.com 】
+ * Link   : http://www.fitgrace.com/
+ * Since  : 2015-11-23
+ *
+ * Description【作用描述】
+ *  清除浮动
+ * Requires【依赖模块】
+ *  无
+ *
+ */
+
+.fn-clear {
+
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+
+    /* for IE6 IE7 */
+    *zoom: 1;
+}

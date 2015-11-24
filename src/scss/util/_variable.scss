@@ -1,0 +1,85 @@
+/**
+ * File   : _variable.scss
+ * Author : FitGrace【fitingrace#gmail.com 】
+ * Link   : http://www.fitgrace.com/
+ * Since  : 2015-11-23
+ *
+ * Description【作用描述】
+ *  变量库，定义在CSS编写过程中常用的属性值。
+ * Requires【依赖模块】
+ *  无
+ *
+ */
+
+/* Colors */
+$white        : #fff !defalut;
+
+$gray-base    : #000 !default;
+$gray-darker  : lighten($gray-base, 13.5%) !default; /* #222 */
+$gray-dark    : lighten($gray-base, 20%)   !default; /* #333 */
+$gray         : lighten($gray-base, 33.5%) !default; /* #555 */
+$gray-light   : lighten($gray-base, 46.7%) !default; /* #777 */
+$gray-lighter : lighten($gray-base, 93.5%) !default; /* #eee */
+
+$brand-primary : #337ab7 !default; /* 基本 */
+$brand-success : #5cb85c !default; /* 成功 */
+$brand-info    : #5bc0de !default; /* 信息 */
+$brand-warning : #f0ad4e !default; /* 警告 */
+$brand-danger  : #d9534f !default; /* 危险 */
+
+
+/* HTML */
+$html-bg    : $white     !default;
+$text-color : $gray-dark !default;
+
+
+/* Font & Line-height */
+$font-family-serif : tahoma, arial, \5b8b\4f53, sans-serif !default;
+$font-family-yahei : "Microsoft YaHei", "微软雅黑", "SimSun", \5b8b\4f53, sans-serif !default;
+
+$font-size-base  : 14px !default;
+$font-size-large : ceil(($font-size-base * 1.25)) !default; /* ~18px */
+$font-size-small : ceil(($font-size-base * 0.85)) !default; /* ~12px */
+
+$line-height-base     : 1.428571429 !default; /* 20/14 */
+/* Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.  */
+$line-height-computed : floor(($font-size-base * $line-height-base)) !default; /* ~20px */
+
+
+/* Link color */
+$link-color            : #428bca !default;
+$link-hover-color      : darken($link-color, 15%) !default;
+$link-decoration       : none !default;
+$link-hover-decoration : none !default;
+
+
+/* Button */
+$btn-height             : 28px !default;
+$btn-margin-vertical    : 2px  !default;
+$btn-margin-horizontal  : 2px  !default;
+$btn-padding-vertical   : 2px  !default;
+$btn-padding-horizontal : 2px  !default;
+$btn-font-size          : 14px !default;
+$btn-font-family        : $font-family-serif !default;
+$btn-line-height        : 28px !default;
+
+/* Button color */
+$btn-blue-border       : #ccc !default;
+$btn-blue-bg           : #ccc !default;
+$btn-blue-color        : #ccc !default;
+$btn-blue-hover-border : #ccc !default;
+$btn-blue-hover-bg     : #ccc !default;
+$btn-blue-hover-color  : #ccc !default;
+
+
+/* Table */
+$table-cell-max-width          : 300px !default;
+$table-cell-min-width          : 40px  !default;
+$table-cell-padding-vertical   : 8px !default;
+$table-cell-padding-horizontal : 5px !default;
+$table-cell-text-align         : center !default;
+$table-border-style            : solid !default;
+$table-border-color            : #ccc !default;
+$table-header-bg               : #ccc !default;
+$table-tbody-hover-tr-bg       : #ccc !default;
+$table-tbody-even-tr-bg        : #ccc !default;

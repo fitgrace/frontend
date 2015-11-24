@@ -1,0 +1,55 @@
+/**
+ * File   : _table.scss
+ * Author : FitGrace【fitingrace#gmail.com 】
+ * Link   : http://www.fitgrace.com/
+ * Since  : 2015-11-23
+ *
+ * Description【作用描述】
+ *  数据表格样式
+ * Requires【依赖模块】
+ *  _variables.scss
+ *  _mixins.scss
+ *
+ */
+
+
+
+/* 加载依赖 */
+@import 'variables';
+@import 'mixins';
+
+
+.fn-table {
+
+    width: 100%;
+
+    th, td {
+        max-width: 300px;
+        min-width: 40px;
+        padding: 8px 5px;
+        border: 1px solid $table-border;
+        text-align: center;
+    }
+
+    thead {
+        th {
+            background-color: $table-header-bg;
+            white-space: nowrap;
+        }
+    }
+
+    tbody {
+
+        tr {
+            /* Hover */
+            &:hover {
+                background-color: $table-tbody-hover-tr-bg;
+            }
+
+            /* 偶数行 */
+            &:nth-child(even) {
+                background-color: $table-tbody-even-tr-bg;
+            }
+         }
+    }
+}

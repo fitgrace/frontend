@@ -1,0 +1,84 @@
+/**
+ * File   : _utility.scss
+ * Author : FitGrace【fitingrace#gmail.com 】
+ * Link   : http://www.fitgrace.com/
+ * Since  : 2015-11-24
+ *
+ * Description【作用描述】
+ *  针对全站的最底层默认设定
+ * Requires【依赖模块】
+ *  _variables.scss
+ *  _mixins.scss
+ *
+ */
+
+
+/* 加载依赖 */
+@import 'variables';
+@import 'mixins';
+
+
+/* 防止用户自定义背景颜色对网页的影响 */
+html {
+    background-color: $html-bg;
+    color: $text-color;
+}
+
+/* 修正字体，要注意表单元素并不继承父级 font 的问题 */
+body {
+    font-size: $font-size-base;
+    line-height: $line-height-baset;
+    font-family: $font-family-serif;
+}
+
+input,
+button,
+select,
+textarea {
+    margin: 0;
+    line-height: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* 链接样式 */
+a {
+    color: $link-color;
+    text-decoration: $link-decoration;
+
+    &:focus,
+    &:hover {
+        color: $link-hover-color;
+        text-decoration: $link-hover-decoration;
+	    outline: 0;
+    }
+}
+
+/* 浮动 */
+.pull-left,
+.pull-right {
+    display: inline; /* 设置内联, 减少浮动带来的bug */
+}
+.pull-left {
+    float: left;
+}
+.pull-right {
+    float: right;
+}
+
+/* 隐藏&显示, 通常用来与 JS 配合 */
+.fn-hide {
+    display: none;
+}
+.fn-show {
+    display: block;
+}
+.fn-inline-show {
+    @include fn-inline-block;
+}
+
+.fn-text-center {
+    text-align: center;
+}

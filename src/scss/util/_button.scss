@@ -1,0 +1,59 @@
+/**
+ * File   : _button.scss
+ * Author : FitGrace【fitingrace#gmail.com 】
+ * Link   : http://www.fitgrace.com/
+ * Since  : 2015-11-23
+ *
+ * Description【作用描述】
+ *  按钮样式
+ * Requires【依赖模块】
+ *  _variables.scss
+ *  _mixins.scss
+ *
+ */
+
+
+/* 加载依赖 */
+@import 'variables';
+@import 'mixins';
+
+
+.fn-btn {
+    @include inline-block;
+    @include border-radius;
+    height: $btn-height;
+    margin: $btn-margin-vertical $btn-margin-horizontal;
+    padding: $btn-margin-vertical $btn-margin-horizontal;
+    border-width: 1px;
+    border-style: solid;
+    font-size: $btn-font-size;
+    font-family: $btn-font-family;
+    font-weight: normal;
+    vertical-align: middle;
+    text-decoration: none;
+    line-height: $btn-line-height;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+
+/* Blue */
+.btn-blue {
+    border-color: $btn-blue-border;
+    background-color: $btn-blue-bg;
+    color: $btn-blue-color;
+
+    &:hover{
+        border-color: $btn-blue-hover-border;
+        background-color: $btn-blue-hover-bg;
+        color: $btn-blue-hover-color;
+    }
+}

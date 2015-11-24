@@ -1,0 +1,95 @@
+/**
+ * File   : _mixins.scss
+ * Author : FitGrace【fitingrace#gmail.com 】
+ * Link   : http://www.fitgrace.com/
+ * Since  : 2015-11-23
+ *
+ * Description【作用描述】
+ *  混入(Mixins)是Sass最重要的特性之一，它支持重复引用属性或选择器样式，从而避免复制粘贴。
+ * Requires【依赖模块】
+ *  无
+ *
+ */
+
+/**
+ * Font size
+ * @param {number} $size - 字体大小
+ * @example
+ *      p {
+ *          @include font-size(14px)
+ *      }
+ */
+@function calculateRem($size) {
+	$remSize: $size / 16px;
+	@return $remSize * 1rem;
+}
+@mixin font-size($size) {
+	font-size: $size;
+	font-size: calculateRem($size);
+}
+
+
+/**
+ * inline-block
+ * @example
+ *      span {
+ *          @include inline-block;
+ *      }
+ */
+@mixin inline-block {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+
+/**
+ * Border radius
+ * @param {number} $radius - 圆角大小
+ * @param {string} $direction - 圆角位置
+ * @example
+ *      p {
+ *          @include border-radius(2px, all);
+ *      }
+ */
+@mixin border-radius($radius:2px, $direction:all) {
+    @if ($direction == all) {
+           -moz-border-radius: $radius;
+        -webkit-border-radius: $radius;
+                border-radius: $radius;
+    }
+
+    @if ($direction == top) {
+           -moz-border-radius: $radius $radius 0 0;
+        -webkit-border-radius: $radius $radius 0 0;
+                border-radius: $radius $radius 0 0;
+    }
+
+    @if ($direction == right) {
+           -moz-border-radius: 0 $radius $radius 0;
+        -webkit-border-radius: 0 $radius $radius 0;
+                border-radius: 0 $radius $radius 0;
+    }
+
+    @if ($direction == bottom) {
+           -moz-border-radius: 0 0 $radius $radius;
+        -webkit-border-radius: 0 0 $radius $radius;
+                border-radius: 0 0 $radius $radius;
+    }
+
+    @if ($direction == left) {
+           -moz-border-radius: $radius 0 0 $radius;
+        -webkit-border-radius: $radius 0 0 $radius;
+                border-radius: $radius 0 0 $radius;
+    }
+}
+
+
+/**
+ * Box shadow
+ */
+@mixin box-shadow($param:0 1px 1px rgba(0,0,0,0.1)) {
+ 	   -moz-box-shadow: $param;
+ 	-webkit-box-shadow: $param;
+  	        box-shadow: $param;
+}
