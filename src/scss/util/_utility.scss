@@ -14,7 +14,7 @@
 
 
 /* 加载依赖 */
-@import 'variables';
+@import 'variable';
 @import 'mixins';
 
 
@@ -27,7 +27,7 @@ html {
 /* 修正字体，要注意表单元素并不继承父级 font 的问题 */
 body {
     font-size: $font-size-base;
-    line-height: $line-height-baset;
+    line-height: $line-height-base;
     font-family: $font-family-serif;
 }
 
@@ -76,7 +76,7 @@ a {
     display: block;
 }
 .fn-inline-show {
-    @include fn-inline-block;
+    @include inline-block;
 }
 
 .fn-text-center {

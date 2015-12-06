@@ -2,7 +2,7 @@
  * 发布阶段的 webpack 配置项
  * 相对于开发阶段的区别在于功能开关不一样
  */
-var webpack         = require('webpack');
+//var webpack         = require('webpack');
 var glob            = require('glob'); //通配符文件列表
 
 //var commonsPlugin   = new webpack.optimize.CommonsChunkPlugin('common.js'); //单独打包公共模块
@@ -15,10 +15,12 @@ var glob            = require('glob'); //通配符文件列表
  *  true    : 有效，主要用于开发阶段的程序调试
  *  false   : 无效，发布时将不会发布代码
  */
-var featureFlag     = new webpack.DefinePlugin({
-        __DEBUG__   : true, //调试, 如： __DEBUG__ console.log('Hi~~');
-        __DEVELOP__ : true  //开发阶段, 未开发完成，不做发布的功能
-    });
+/*
+var featureFlag = new webpack.DefinePlugin({
+    __DEBUG__   : true, //调试, 如： __DEBUG__ console.log('Hi~~');
+    __DEVELOP__ : true  //开发阶段, 未开发完成，不做发布的功能
+});
+*/
 
 /**
  * 获得所有入口文件
@@ -37,7 +39,7 @@ function getEntry() {
 
 }
 
-module.exports = {
+var webpack = {
     entry: getEntry(),
     output: {
         path     : __dirname,  //存入生成的入口.js文件的路径目录
@@ -48,7 +50,7 @@ module.exports = {
         //commonsPlugin,
         //uglifyJs,
         //ignoreFiles, //不打包jquery
-        featureFlag
+        //featureFlag
     ],
     module: {
         loaders: [
@@ -60,3 +62,5 @@ module.exports = {
         extensions: ['', '.js', '.json', '.html']
     }
 };
+
+module.exports = webpack;
