@@ -63,6 +63,17 @@ var path = {
             './src/dep/datetimepicker/jquery.datetimepicker.css',
             './dist/utility.css'
         ]
+    },
+    // 案例的css, js 文件
+    sample: {
+        div: {
+            js   : './example/js/**/*.js',
+            css  : './example/scss/**/*.scss'
+        },
+        min: {
+            js   : './example/asset/js',
+            css  : './example/asset//css'
+        }
     }
 }
 

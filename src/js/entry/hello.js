@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * File   : hello.js
  * Author : FitGrace【fitingrace#gmail.com 】
@@ -9,8 +11,9 @@
  *
  */
 
+
 var seaHello = function() {
-    console.log('Hello fitgrace!')
-}
+    console.log('Hello fitgrace!');
+};
 
 module.exports = seaHello;

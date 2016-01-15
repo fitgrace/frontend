@@ -21,15 +21,21 @@
   },
   "homepage": "https://github.com/fitgrace/frontend#readme",
   "devDependencies": {
-    "glob": "^6.0.1",
+    "glob": "^6.0.4",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^1.1.1",
     "gulp-imagemin": "^2.4.0",
-    "gulp-minify-css": "^1.2.2",
-    "gulp-sass": "^2.1.0",
+    "gulp-minify-css": "^1.2.3",
+    "gulp-minify-html": "^1.0.5",
+    "gulp-rev": "^6.0.1",
+    "gulp-rev-collector": "^1.0.2",
+    "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
-    "webpack": "^1.12.9",
+    "jshint": "^2.9.1",
+    "webpack": "^1.12.11",
     "webpack-stream": "^2.3.0"
   }
 }

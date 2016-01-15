@@ -1,42 +1,47 @@
-/*
-var rev             = require('gulp-rev'); //- 对文件名加MD5后缀
-var revCollector    = require('gulp-rev-collector'); //- 路径替换
-*/
 // 首先要全局安装一次
-const gulp            = require('gulp');
+const gulp             = require('gulp');
 
-// 首先要全局安装一次
-const webpack         = require('webpack-stream');
-
-// 开发阶段webpack 配置文件
+// 编译js
+const webpack          = require('webpack-stream');
+// 开发阶段 webpack 配置文件
 const webpackConfigDev = require('./webpack.config.dev');
-
-// 发布阶段webpack 配置文件
+// 发布阶段 webpack 配置文件
 const webpackConfigMin = require('./webpack.config.min');
 
 // JS校验
-//const jshint          = require('gulp-jshint');
+const jshint           = require('gulp-jshint');
 
 // JS 压缩
-const uglify          = require('gulp-uglify');
+const uglify           = require('gulp-uglify');
 
 // 编译 scss 成为 css 文件
-const sass            = require('gulp-sass');
+const sass             = require('gulp-sass');
 
 // 生成 source map
-const sourcemaps      = require('gulp-sourcemaps');
+const sourcemaps       = require('gulp-sourcemaps');
 
 // 压缩 css
-const minifycss       = require('gulp-minify-css');
+const minifycss        = require('gulp-minify-css');
+
+// 文件合并
+const concat           = require('gulp-concat');
 
 // 压缩图片
-const imagemin        = require('gulp-imagemin');
+const imagemin         = require('gulp-imagemin');
+
+// 对文件名加MD5后缀
+const rev              = require('gulp-rev');
+// 路径替换
+const revCollector     = require('gulp-rev-collector');
+
+// 压缩html
+const minifyHTML       = require('gulp-minify-html');
 
 // 删除文件
-const gulpClean = require('gulp-clean');
+const gulpClean        = require('gulp-clean');
 
 // 配置文件
-const config = require('./config.js');
+const config           = require('./config.js');
 
 /**
  * 删除目录
@@ -54,8 +59,8 @@ function clean(callback){
 function syntaxJavascript(callback) {
     gulp.src(config.dev.js)
         // js代码检验
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter('default'))
+        .pipe(eslint('.eslintrc.js'))
+        .pipe(eslint.failAfterError())
         // 结束
         .on('finish', callback);
 }
@@ -161,6 +166,8 @@ gulp.task('mincss', gulp.parallel(releaseCss));
 gulp.task('minimg', gulp.parallel(compressionImage));
 
 gulp.task('devjs', gulp.parallel(compileJavascript));
+
+gulp.task('syjs', gulp.parallel(syntaxJavascript));
 
 /**
  * series 任务是顺序执行的

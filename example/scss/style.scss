@@ -1,0 +1,42 @@
+/**
+ * File   : style.scss
+ * Author : FitGrace【fitingrace#gmail.com 】
+ * Link   : http://www.fitgrace.com/
+ * Since  : 2015-12-07
+ *
+ * Description【作用描述】
+ *      框架案例样式文件
+ *
+ * Requires【依赖模块】
+ *      元
+ *
+ */
+
+
+.header {
+    padding: 3rem 1rem;
+    background-color: #2a3440;
+    text-align: center;
+
+    .masthead {
+        margin-bottom: .25rem;
+        color: #fff;
+    }
+
+    .prologue {
+        color: rgba(255,255,255,.5);
+    }
+}
+
+.section {
+    .section-hd {
+        padding: 3rem 3rem 2.5rem;
+        background-color: #dfe1e8;
+    }
+
+    .section-bd {
+        code {
+            background-color: #f7f7f9;
+        }
+    }
+}
