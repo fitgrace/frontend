@@ -12,8 +12,18 @@
  */
 
 
-var seaHello = function() {
+var seaHello = function () {
     console.log('Hello fitgrace!');
+
+    vv = 'Good boy!';
+
+    console.log(vv);
+
+    var vc = 1;
+
+    if (vc === 0) {
+        console.log('vc is good');
+    }
 };
 
 module.exports = seaHello;

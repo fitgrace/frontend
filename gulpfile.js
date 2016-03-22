@@ -1,3 +1,17 @@
+'use strict';
+
+/**
+ * File   : gulpfile.js
+ * Author : FitGrace【fitingrace@gmail.com 】
+ * Link   : http://www.fitgrace.com/
+ * Since  : 2015-12-02
+ *
+ * Description【作用描述】
+ *      gulp 各项配置
+ *
+ */
+
+
 // 首先要全局安装一次
 const gulp             = require('gulp');
 
@@ -9,7 +23,7 @@ const webpackConfigDev = require('./webpack.config.dev');
 const webpackConfigMin = require('./webpack.config.min');
 
 // JS校验
-const jshint           = require('gulp-jshint');
+const eslint           = require('gulp-eslint')
 
 // JS 压缩
 const uglify           = require('gulp-uglify');
@@ -60,7 +74,8 @@ function syntaxJavascript(callback) {
     gulp.src(config.dev.js)
         // js代码检验
         .pipe(eslint('.eslintrc.js'))
-        .pipe(eslint.failAfterError())
+        // 把检测结果输出到console
+        .pipe(eslint.format())
         // 结束
         .on('finish', callback);
 }
@@ -78,27 +93,23 @@ function compileJavascript(callback) {
 }
 
 /**
- * CSS 语法检查
+ * 发布JS到上线环境目录
  */
-function syntaxCss(callback) {
+function releaseJavascript(callback) {
+    gulp.src(config.dev.js)
+        // webpack 编译
+        .pipe(webpack(webpackConfigMin))
+        // 压缩JS文件
+        .pipe(uglify())
+        // 输出文件到指定目录
+        .pipe(gulp.dest(config.min.js))
+        .on('finish', callback);
 }
 
 /**
- * IMG 图片压缩
+ * CSS 语法检查
  */
-function compressionImage(callback) {
-    gulp.src(config.dev.img)
-        // 压缩图片
-        .pipe(imagemin({
-            optimizationLevel: 5, // 类型：Number  默认：3  取值范围：0-7（优化等级）
-            progressive: true, // 类型：Boolean 默认：false 无损压缩jpg图片
-            interlaced: true, // 类型：Boolean 默认：false 隔行扫描gif进行渲染
-            multipass: true // 类型：Boolean 默认：false 多次优化svg直到完全优化
-        }))
-        // 保存文件到指定的目录
-        .pipe(gulp.dest(config.min.img))
-        // 结束
-        .on('finish', callback);
+function syntaxCss(callback) {
 }
 
 /**
@@ -142,22 +153,82 @@ function releaseCss(callback) {
 }
 
 /**
- * 从src拷贝html到dev
+ * IMG 图片压缩
  */
-function copyHtml(callback) {
+function compressionImage(callback) {
+    gulp.src(config.dev.img)
+        // 压缩图片
+        .pipe(imagemin({
+            optimizationLevel: 5, // 类型：Number  默认：3  取值范围：0-7（优化等级）
+            progressive: true, // 类型：Boolean 默认：false 无损压缩jpg图片
+            interlaced: true, // 类型：Boolean 默认：false 隔行扫描gif进行渲染
+            multipass: true // 类型：Boolean 默认：false 多次优化svg直到完全优化
+        }))
+        // 保存文件到指定的目录
+        .pipe(gulp.dest(config.min.img))
+        // 结束
+        .on('finish', callback);
 }
 
 /**
- * 对dev下面的js/css进行md5
+ * 从src拷贝html到dev
  */
-function reversion(callback) {
+function copyHtml(callback) {
+    gulp.src(config.dev.html)
+        // 保存文件到指定的目录
+        .pipe(gulp.dest(config.min.html))
+        // 结束
+        .on('finish', callback);
+}
+
+/**
+ * 对dev下面的JS进行md5
+ */
+function reversionJavascript(callback) {
+    gulp.src(config.md5.js)
+        // 给文件名加MD5后缀
+        .pipe(rev())
+        // 保存文件到指定的目录
+        .pipe(gulp.dest(config.min.js))
+        // 生成一个rev-manifest.json
+        .pipe(rev.manifest())
+        // 输出rev-manifest.json 文件到指定目录
+        .pipe(gulp.dest(config.rev.js))
+        // 结束
+        .on('finish', callback);
+}
+
+/**
+ * 对dev下面的CSS进行md5
+ */
+function reversionCss(callback) {
+    gulp.src(config.md5.css)
+        // 给文件名加MD5后缀
+        .pipe(rev())
+        // 保存文件到指定的目录
+        .pipe(gulp.dest(config.min.css))
+        // 生成一个rev-manifest.json
+        .pipe(rev.manifest())
+        // 输出rev-manifest.json 文件到指定目录
+        .pipe(gulp.dest(config.rev.css))
+        // 结束
+        .on('finish', callback);
 }
 
 /**
  * 替换dev下html中js/css进行过md5之后的文件路径，并拷贝到dist
  */
 function replcae(callback) {
+    gulp.src([config.rev.rev, config.md5.html])
+        // 执行目录内文件名的替换
+        .pipe(revCollector())
+        // 输出替换后的文件到指定目录
+        .pipe(gulp.dest(config.min.html))
+        // 结束
+        .on('finish', callback);
 }
+
+gulp.task('clean', gulp.parallel(clean));
 
 gulp.task('sass', gulp.parallel(compileCss));
 
@@ -166,8 +237,16 @@ gulp.task('mincss', gulp.parallel(releaseCss));
 gulp.task('minimg', gulp.parallel(compressionImage));
 
 gulp.task('devjs', gulp.parallel(compileJavascript));
+gulp.task('minjs', gulp.parallel(releaseJavascript));
 
-gulp.task('syjs', gulp.parallel(syntaxJavascript));
+gulp.task('lintjs', gulp.parallel(syntaxJavascript));
+
+gulp.task('revjs', gulp.parallel(reversionJavascript));
+gulp.task('revcss', gulp.parallel(reversionCss));
+
+gulp.task('chtml', gulp.parallel(copyHtml));
+
+gulp.task('rep', gulp.parallel(replcae));
 
 /**
  * series 任务是顺序执行的

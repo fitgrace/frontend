@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * File   : config.js
  * Author : FitGrace【fitingrace#gmail.com 】
@@ -15,7 +17,7 @@ var path = {
         js   : './src/js/entry/**/*.js',
         css  : './src/scss/entry/**/*.scss',
         img  : './src/img/**/*',
-        html : './../Application/Ucmm/View/**/*'
+        html : './src/html/**/*'
     },
     // 输出路径，发布环境下的代码目录
     min : {
@@ -29,16 +31,23 @@ var path = {
         js  : './src/js/**/*',
         css : './src/scss/**/*'
     },
+    // 需要打版本号文件目录
+    md5 : {
+        js   : './dist/js/**/*.js',
+        css  : './dist/css/**/*.css',
+        html : './dist/view/**/*.html'
+    },
     // 版本号目录，用来存放编辑js, css时生成的版号信息文件
     rev : {
         js  : './dist/rev/js',
         css : './dist/rev/css',
-        rev : './dist/rev/*/*.json'
+        rev : './dist/rev/**/*.json'
     },
     // 发布时发删除的发布环境不需要的文件目录
     del : [
         './dist/js/*',
         './dist/css/*',
+        './dist/view/*',
         './dist/rev/**/*.json'
     ],
     // 项目底层公共的js, css编译，发布目录
@@ -47,26 +56,20 @@ var path = {
         css : './src/scss/utility.scss',
         min : './dist'
     },
-    // 项目用到的外部插件并需要拼接的目录
-    concat: {
+    // 项目用到的外部插件并需要拼接成一个文件
+    unite: {
         js: [
             './src/dep/jquery-1.11.2.min.js',
-            './src/dep/cmm.js',
-            './src/dep/colortip-1.0-jquery.js',
-            './src/dep/artDialog/dialog-min.js',
-            './src/dep/jquery-textrange.js',
-            './src/dep/datetimepicker/jquery.datetimepicker.js',
             './dist/utility.js'
         ],
         css: [
-            './src/dep/font-awesome.min.css',
-            './src/dep/datetimepicker/jquery.datetimepicker.css',
+            './src/dep/normalize.css',
             './dist/utility.css'
         ]
     },
     // 案例的css, js 文件
     sample: {
-        div: {
+        dev: {
             js   : './example/js/**/*.js',
             css  : './example/scss/**/*.scss'
         },
@@ -75,6 +78,6 @@ var path = {
             css  : './example/asset//css'
         }
     }
-}
+};
 
 module.exports = path;
